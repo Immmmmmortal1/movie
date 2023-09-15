@@ -12,7 +12,7 @@ class FilmDetailPage extends StatefulWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppbar(context, projectName),
-      body: ,
+      body: bodydeta,
     )
   }
 }

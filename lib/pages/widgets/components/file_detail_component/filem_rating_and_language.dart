@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/models/movie_api_model.dart';
 import 'package:movie/utils/colors.dart';
+import 'package:movie/utils/text_styles.dart';
 
 class RatingAndLanguage extends StatelessWidget {
 
@@ -48,30 +50,58 @@ final String language;
                   )
                 ]
               ),
-              child: const Row(
+              child:  Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget> [
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Icon(Icons.star,color: Colors.yellow,),
+                        Icon(Icons.star,color: Colors.yellow),
                         RichText(
                           text: TextSpan(
                             children: [
-                              TextSpan
-                            ]
-                          ))
+                              TextSpan(
+                                text: movie.voteAverage?.toString() ?? unknow,
+                                style: DetailPageTextFeature.voteIconStyle,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(tr('average_vote')),
                       ],
+                    ),
+                    ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                          decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child:  Text(
+                                  movie.originalLanguage ?? unknow,
+                                  style: DetailPageTextFeature.languageText,
+                                ),
+                        ),
+                        const SizedBox(height: 8),
+                         Text(tr('language'),
+                              style: DetailPageTextFeature.languageSubText),
+                      ],
+
                     )
                     ),
-                  // Expanded(child: child),
-                ]
+                ],
               ) ,
             ),
           )
         ]
       ),
-    )
+    );
   }
 }

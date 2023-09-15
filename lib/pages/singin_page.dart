@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/pages/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -32,7 +34,35 @@ class _SingInPageState extends State<SingInPage> {
     });
   }
   void _signIn() async { 
+ String enteredName = nameController.text;
+    String enteredSurname = surnameController.text;
+    String enteredPassword = passwordController.text;
+    String enteredUsername = usernameController.text;
 
+    if (enteredName.isNotEmpty &&
+        enteredSurname.isNotEmpty &&
+        enteredPassword.isNotEmpty &&
+        enteredUsername.isNotEmpty) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('name', enteredName);
+      prefs.setString('surname', enteredSurname);
+      prefs.setString('username', enteredUsername);
+      prefs.setString('password', enteredPassword);
+
+      if (kDebugMode) {
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+      }
+    } else {
+      if (kDebugMode) {
+        print("Bilgiler Eksik!");
+      }
+    }
   }
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/pages/tabbar.dart';
 import 'package:movie/service/data_provider.dart';
 import 'package:movie/utils/colors.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,7 @@ class __OnBoardBodyState extends State<_OnBoardBody> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const OnBoardPage(),
+        builder: (context) => const MyTabbar(),
       ),
     );
   }

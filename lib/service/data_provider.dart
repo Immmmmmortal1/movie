@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:movie/models/cast_model.dart';
 import 'package:movie/models/credit_model.dart';
 import 'package:movie/models/gneres_model.dart';
 
@@ -95,7 +96,28 @@ class DataProvider with ChangeNotifier {
     _isLoading = value;
     notifyListeners();
   }
+ 
+ Future<CastModel?> fetchCast(int movieId) async {
+    const String apikey = 'fd10bbeb5c19457485e61cb462e882b4';
+    try {
+      final castResponse = await ApiService
+          .get('/3/movie/$movieId/credits?api_key=$apikey');
 
+      if (castResponse.statusCode == HttpStatus.ok) {
+        return CastModel.fromJson(castResponse.data);
+      } else {
+        if (kDebugMode) {
+          print('Oyuncu verisi alınamadı');
+        }
+        return null;
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('Hata oluştu: $e');
+      }
+      return null;
+    }
+  }
   
 }
 

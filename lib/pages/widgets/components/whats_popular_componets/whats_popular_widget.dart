@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:movie/getsFunc/get_formate_runtime.dart';
 import 'package:movie/getsFunc/get_genres_name.dart';
+import 'package:movie/pages/details/film_detail_page.dart';
 import 'package:movie/pages/widgets/components/whats_popular_componets/whats_popular_film_title.dart';
 import 'package:movie/pages/widgets/components/whats_popular_componets/whats_popular_poster.dart';
 import 'package:movie/service/data_provider.dart';
@@ -59,7 +60,8 @@ class _WhatsPopularWidgetState extends State<WhatsPopularWidget> {
                         children: [
                           InkWell(
                             onTap: () {
-                              
+                              Navigator.push(context,
+                               MaterialPageRoute(builder: (context) => FilmDetailPage(movie: movie)));
                             },
                             child: WhatsPopularPoster(movie: movie),
                           ),
